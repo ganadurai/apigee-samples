@@ -77,9 +77,12 @@ echo "Your Proxy URL is: https://$PROXY_URL"
 if [ -z "$GRAPHQL_HOSTED" ]; then 
   if [[ $GRAPHQL_ENDPOINT == "$STATIC_GRAPHQL_ENDPOINT" ]]; then
     echo " "
+    echo "Introspect GraphQL schema via Apigee Endpoint: https://studio.apollographql.com/sandbox/explorer?endpoint=https://$PROXY_URL"
+    echo " "
     echo "Test GraphQL endpoint via Apigee proxy:"
     echo curl \"https://$PROXY_URL\" --request POST --header \'content-type: application/json\' \
     --data \'{\"query\":\"query GetLaunches {\\n  launches {\\n    launches {\\n      id\\n      site\\n      rocket {\\n        id\\n        name\\n      }\\n    }\\n  }\\n}\"}\'
+    echo " "
   fi
 else
   curl --request POST \
