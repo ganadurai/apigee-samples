@@ -31,7 +31,7 @@ fi
 
 if [ -z "$GRAPHQL_HOSTED" ]; then
   if [ -z "$GRAPHQL_ENDPOINT" ]; then
-    export GRAPHQL_ENDPOINT="https://main--spacex-l4uc6p.apollographos.net/graphql"
+    export GRAPHQL_ENDPOINT="https://apollo-fullstack-tutorial.herokuapp.com/graphql"
   else
     sed -i -e "s#<URL>.*</URL>#<URL>$GRAPHQL_ENDPOINT</URL>#g" apiproxy/targets/default.xml
   fi
@@ -72,7 +72,9 @@ echo "All the Apigee artifacts are successfully deployed!"
 echo " "
 echo "Your Proxy URL is: https://$PROXY_URL"
 
-if [ -z "$GRAPHQL_HOSTED" ]; then
+if [ -z "$GRAPHQL_HOSTED" ]; then 
+  echo "GraphQL not hosted in Cloud Run"
+else
   curl --request POST \
     --header 'content-type: application/json' \
     --url "https://$PROXY_URL" \

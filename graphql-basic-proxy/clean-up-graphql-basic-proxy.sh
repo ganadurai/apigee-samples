@@ -33,6 +33,8 @@ if [ -z "$APIGEE_HOST" ]; then
 fi
 
 if [ -z "$GRAPHQL_HOSTED" ]; then 
+  echo "GraphQL not hosted in Cloud Run"
+else
   gcloud run services delete graphql-example-application --region us-central1
 fi
 

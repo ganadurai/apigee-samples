@@ -10,7 +10,7 @@ Apigee API proxy provides a facade for the backend GraphQL service. The API prox
 ## GraphQL Endpoint 
 
 ``` bash
-export GRAPHQL_ENDPOINT="https://main--spacex-l4uc6p.apollographos.net/graphql"
+export GRAPHQL_ENDPOINT="https://apollo-fullstack-tutorial.herokuapp.com/graphql"
 ```
 If for any reason, you need to change the GraphQL endpoint Apigee uses, change the above variable to the url you need.
 
