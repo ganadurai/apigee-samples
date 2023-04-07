@@ -19,3 +19,6 @@ export APIGEE_HOST="<APIGEE_DOMAIN_NAME>"
 export APIGEE_ENV="<APIGEE_ENVIRONMENT_NAME>"
 
 gcloud config set project $PROJECT
+
+#Update this value if you want to point to any other external GraphQL endpoint
+export GRAPHQL_ENDPOINT="https://apollo-fullstack-tutorial.herokuapp.com/graphql"

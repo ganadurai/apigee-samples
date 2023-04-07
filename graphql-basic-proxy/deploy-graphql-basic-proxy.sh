@@ -29,9 +29,11 @@ if [ -z "$APIGEE_HOST" ]; then
     exit
 fi
 
+STATIC_GRAPHQL_ENDPOINT="https://apollo-fullstack-tutorial.herokuapp.com/graphql";
+
 if [ -z "$GRAPHQL_HOSTED" ]; then
   if [ -z "$GRAPHQL_ENDPOINT" ]; then
-    export GRAPHQL_ENDPOINT="https://apollo-fullstack-tutorial.herokuapp.com/graphql"
+    export GRAPHQL_ENDPOINT=$STATIC_GRAPHQL_ENDPOINT
   else
     sed -i -e "s#<URL>.*</URL>#<URL>$GRAPHQL_ENDPOINT</URL>#g" apiproxy/targets/default.xml
   fi
@@ -73,7 +75,10 @@ echo " "
 echo "Your Proxy URL is: https://$PROXY_URL"
 
 if [ -z "$GRAPHQL_HOSTED" ]; then 
-  echo "GraphQL not hosted in Cloud Run"
+  if [[ $GRAPHQL_ENDPOINT == "$STATIC_GRAPHQL_ENDPOINT" ]]; then
+    ehco curl "$PROXY_URL" --request POST --header 'content-type: application/json' \
+    --data '{"query":"query GetLaunches {\n  launches {\n    launches {\n      id\n      site\n      rocket {\n        id\n        name\n      }\n    }\n  }\n}"}'
+  fi
 else
   curl --request POST \
     --header 'content-type: application/json' \
