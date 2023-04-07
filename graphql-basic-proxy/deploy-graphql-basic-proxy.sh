@@ -79,7 +79,7 @@ if [ -z "$GRAPHQL_HOSTED" ]; then
     echo " "
     echo "Test GraphQL endpoint via Apigee proxy:"
     echo curl \"https://$PROXY_URL\" --request POST --header \'content-type: application/json\' \
-    --data \'{"query":"query GetLaunches {\n  launches {\n    launches {\n      id\n      site\n      rocket {\n        id\n        name\n      }\n    }\n  }\n}"}\'
+    --data \'{\"query\":\"query GetLaunches {\\n  launches {\\n    launches {\\n      id\\n      site\\n      rocket {\\n        id\\n        name\\n      }\\n    }\\n  }\\n}\"}\'
   fi
 else
   curl --request POST \
