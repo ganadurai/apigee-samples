@@ -1,0 +1,16 @@
+{
+    "operationConfigs": [
+      {
+        "apiSource": "graphql-basic-proxy",
+        "operations": [
+          {
+            "resource": "/",
+            "methods": [
+              "POST"
+            ]
+          }
+        ]
+      }
+    ],
+    "operationConfigType": "proxy"
+  }

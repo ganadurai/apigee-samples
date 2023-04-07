@@ -1,0 +1,11 @@
+<APIProxy revision="2" name="graphql-basic-proxy">
+    <DisplayName></DisplayName>
+    <Description></Description>
+    <BasePaths>/v1/samples/graphql-basic-proxy</BasePaths>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+</APIProxy>

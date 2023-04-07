@@ -1,0 +1,18 @@
+{
+  "name": "graphql-example-application",
+  "description": "Sample Graphql Server",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "author": "Google LLC",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "apollo-server": "^3.12.0"
+  }
+}
