@@ -22,6 +22,11 @@ Apigee API proxy provides a facade for the backend GraphQL service. The API prox
     * jq
     * npm
 
+## (QuickStart) Setup usig CloudShell
+
+Use the following GCP CloudShell tutorial, and follow the instructions
+
+[![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.png)](https://ssh.cloud.google.com/cloudshell/open?cloudshell_git_repo=https://github.com/ganadurai/apigee-samples&cloudshell_git_branch=main&cloudshell_workspace=.&cloudshell_tutorial=graphql-basic-proxy/docs/cloudshell-tutorial.md)
 
 ## Setup environment
 

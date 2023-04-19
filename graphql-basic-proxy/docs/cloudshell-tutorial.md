@@ -19,6 +19,7 @@ Navigate to the `graphql-basic-proxy` directory in the Cloud shell.
 
 ```sh
 cd graphql-basic-proxy
+export WORK_DIR=$(pwd)
 ```
 
 Edit the provided sample `env.sh` file, and set the environment variables there.
@@ -38,7 +39,7 @@ source ./env.sh
 This is optional, if you dont have a GraphQL backend for Apigee to proxy into, execute the below to deploy GraphQL application for which Apigee will the facade.
 
 ```sh
-cd graphql-basic-proxy/graphql-server
+cd ${WORK_DIR}/graphql-basic-proxy/graphql-server
 ./deploy-graphql-sample-application.sh
 ```
 
@@ -47,7 +48,7 @@ cd graphql-basic-proxy/graphql-server
 Next, let's create and deploy the Apigee resources necessary to test the quota policy.
 
 ```sh
-cd graphql-basic-proxy
+cd ${WORK_DIR}/graphql-basic-proxy
 ./deploy-graphql-basic-proxy.sh
 ```
 
@@ -81,5 +82,5 @@ Congratulations! You've successfully implemented Apigee proxy for graphql endpoi
 If you want to clean up the artefacts from this example in your Apigee Organization, first source your `env.sh` script, and then run
 
 ```bash
-./clean-up-graphql-basic-proxy.sh
+${WORK_DIR}/clean-up-graphql-basic-proxy.sh
 ```
