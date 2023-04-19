@@ -32,11 +32,7 @@ fi
 STATIC_GRAPHQL_ENDPOINT="https://apollo-fullstack-tutorial.herokuapp.com/graphql";
 
 if [ -z "$GRAPHQL_HOSTED" ]; then
-  if [ -z "$GRAPHQL_ENDPOINT" ]; then
-    export GRAPHQL_ENDPOINT=$STATIC_GRAPHQL_ENDPOINT
-  else
-    sed -i -e "s#<URL>.*</URL>#<URL>$GRAPHQL_ENDPOINT</URL>#g" apiproxy/targets/default.xml
-  fi
+  sed -i -e "s#<URL>.*</URL>#<URL>$GRAPHQL_ENDPOINT</URL>#g" apiproxy/targets/default.xml
 else
   # GraphQL hosted in cloudrun as part of this setup 
   PROJECT_NUMBER="$(gcloud projects describe "${PROJECT_ID}" --format='get(projectNumber)')"
@@ -66,7 +62,6 @@ apigeecli apis create bundle -f apiproxy  -n graphql-basic-proxy --org "$PROJECT
 REV=$(apigeecli apis create bundle -f apiproxy  -n graphql-basic-proxy --org "$PROJECT" --token "$TOKEN" --disable-check | jq ."revision" -r)
 apigeecli apis deploy --wait --name graphql-basic-proxy --ovr --rev "$REV" --org "$PROJECT" --env "$APIGEE_ENV" --token "$TOKEN"
 
-# var is expected by integration test (apickli)
 export PROXY_URL="$APIGEE_HOST/v1/samples/graphql-basic-proxy"
 
 echo " "
@@ -74,20 +69,8 @@ echo "All the Apigee artifacts are successfully deployed!"
 echo " "
 echo "Your Proxy URL is: https://$PROXY_URL"
 
-if [ -z "$GRAPHQL_HOSTED" ]; then 
-  if [[ $GRAPHQL_ENDPOINT == "$STATIC_GRAPHQL_ENDPOINT" ]]; then
-    echo " "
-    echo "Introspect GraphQL schema via Apigee Endpoint: "
-    echo "https://studio.apollographql.com/sandbox/explorer?endpoint=https://$PROXY_URL"
-    echo " "
-    echo "Test GraphQL endpoint via Apigee proxy:"
-    echo curl \"https://$PROXY_URL\" --request POST --header \'content-type: application/json\' \
-    --data \'{\"query\":\"query GetLaunches {\\n  launches {\\n    launches {\\n      id\\n      site\\n      rocket {\\n        id\\n        name\\n      }\\n    }\\n  }\\n}\"}\'
-    echo " "
-  fi
-else
-  curl --request POST \
-    --header 'content-type: application/json' \
-    --url "https://$PROXY_URL" \
-    --data '{"query":"query ExampleQuery {\n  books {\n    title\n    author\n  }\n}"}'
-fi
+
+echo "Introspect GraphQL schema via Apigee Endpoint: "
+echo "https://studio.apollographql.com/sandbox/explorer?endpoint=https://$PROXY_URL"
+echo " "
+

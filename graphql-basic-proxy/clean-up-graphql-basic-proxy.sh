@@ -50,3 +50,9 @@ apigeecli apis undeploy --name graphql-basic-proxy --env "$APIGEE_ENV" --rev "$R
 
 echo "Deleting proxy graphql-basic-proxy"
 apigeecli apis delete --name graphql-basic-proxy --org "$PROJECT" --token "$TOKEN"
+
+if [ -z "$GRAPHQL_HOSTED" ]; then
+  echo "GraphQL endpoint not hosted as part of this excercise."
+else
+  gcloud run services delete graphql-example-application
+fi
