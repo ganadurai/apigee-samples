@@ -53,6 +53,8 @@ if [ -z "$GRAPHQL_ENDPOINT" ]; then
   --member="serviceAccount:cloudrun-invoker@$PROJECT_ID.iam.gserviceaccount.com" \
   --role=roles/run.invoker
 
+  sleep 10
+
   URL_CONTENT="<Authentication><GoogleIDToken><Audience useTargetUrl=\"true\"/></GoogleIDToken></Authentication><URL>$GRAPHQL_HOSTED_ENDPOINT</URL>"
   sed -i -e "s#<URL>.*</URL>#$URL_CONTENT#g" ${WORK_DIR}/apiproxy/targets/default.xml
 else
