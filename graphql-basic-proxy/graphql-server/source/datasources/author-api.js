@@ -3,7 +3,9 @@ const { RESTDataSource } = require('apollo-datasource-rest');
 class AuthorAPI extends RESTDataSource {
   constructor() {
     super();
-    this.baseURL = 'https://34.160.38.226.nip.io/v1/graphql-sample-api-source/';
+    //The string "ENV_HOSTNAME" will be replaced at the time of deploying cloudrun, 
+    //using the user environment value. check deploy-graphql-basic-proxy.sh
+    this.baseURL = 'https://ENV_HOSTNAME/v1/graphql-sample-api-source/';
   }
 
   async getAllAuthors() {

@@ -36,6 +36,9 @@ if [ -z "$GRAPHQL_ENDPOINT" ]; then
 
   cd ${WORK_DIR}/graphql-server/source
 
+  sed -i -e "s#ENV_HOSTNAME#$APIGEE_HOST#g" datasources/book-api.js
+  sed -i -e "s#ENV_HOSTNAME#$APIGEE_HOST#g" datasources/author-api.js
+
   gcloud run deploy graphql-example-application1   \
     --region us-central1   \
     --port 4000 \
