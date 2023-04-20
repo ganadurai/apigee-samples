@@ -74,15 +74,14 @@ export PATH=$PATH:$HOME/.apigeecli/bin
 echo "Uploading Apigee artifacts..."
 
 echo "Importing and Deploying authors api source proxy..."
-REV=$(apigeecli apis create bundle -f apiproxies/authors-api-source -n graphql-sample-api-source-authors --org "$PROJECT_ID" --token "$TOKEN" --disable-check | jq ."revision" -r)
+REV=$(apigeecli apis create bundle -p apiproxies/graphql-sample-api-source-authors.zip -n graphql-sample-api-source-authors --org "$PROJECT_ID" --token "$TOKEN" --disable-check | jq ."revision" -r)
 apigeecli apis deploy --wait --name graphql-sample-api-source-authors --ovr --rev "$REV" --org "$PROJECT_ID" --env "$APIGEE_ENV" --token "$TOKEN" 
 
 echo "Importing and Deploying books api source proxy..."
-REV=$(apigeecli apis create bundle -f apiproxies/books-api-source -n graphql-sample-api-source-books --org "$PROJECT_ID" --token "$TOKEN" --disable-check | jq ."revision" -r)
+REV=$(apigeecli apis create bundle -p apiproxies/graphql-sample-api-source-books.zip -n graphql-sample-api-source-books --org "$PROJECT_ID" --token "$TOKEN" --disable-check | jq ."revision" -r)
 apigeecli apis deploy --wait --name graphql-sample-api-source-books --ovr --rev "$REV" --org "$PROJECT_ID" --env "$APIGEE_ENV" --token "$TOKEN" 
 
 echo "Importing Apigee graphql-basic-proxy proxy..."
-apigeecli apis create bundle -f apiproxies/graphql-proxy  -n graphql-basic-proxy --org "$PROJECT_ID" --token "$TOKEN" --disable-check 
 REV=$(apigeecli apis create bundle -f apiproxy  -n graphql-basic-proxy --org "$PROJECT_ID" --token "$TOKEN" --disable-check | jq ."revision" -r)
 
 echo "Deploying Apigee graphql-basic-proxy proxy..."
