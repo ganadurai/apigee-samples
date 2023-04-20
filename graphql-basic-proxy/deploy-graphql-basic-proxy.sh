@@ -69,12 +69,20 @@ echo "Installing apigeecli"
 curl -s https://raw.githubusercontent.com/apigee/apigeecli/master/downloadLatest.sh | bash
 export PATH=$PATH:$HOME/.apigeecli/bin
 
-echo "Deploying Apigee artifacts..."
+echo "Uploading Apigee artifacts..."
 
 echo "Importing and Deploying Apigee graphql-basic-proxy proxy..."
 apigeecli apis create bundle -f apiproxy  -n graphql-basic-proxy --org "$PROJECT_ID" --token "$TOKEN" --disable-check 
 REV=$(apigeecli apis create bundle -f apiproxy  -n graphql-basic-proxy --org "$PROJECT_ID" --token "$TOKEN" --disable-check | jq ."revision" -r)
-apigeecli apis deploy --wait --name graphql-basic-proxy --ovr --rev "$REV" --org "$PROJECT_ID" --env "$APIGEE_ENV" --token "$TOKEN"
+
+echo "Deploying Apigee artifacts..."
+
+if [ -z "$GRAPHQL_ENDPOINT" ]; then
+  # With service account passed in
+  apigeecli apis deploy --wait --name graphql-basic-proxy --ovr --rev "$REV" --org "$PROJECT_ID" --env "$APIGEE_ENV" --token "$TOKEN" --sa "cloudrun-invoker@$PROJECT_ID.iam.gserviceaccount.com"
+else
+  apigeecli apis deploy --wait --name graphql-basic-proxy --ovr --rev "$REV" --org "$PROJECT_ID" --env "$APIGEE_ENV" --token "$TOKEN" 
+fi
 
 export PROXY_URL="$APIGEE_HOST/v1/samples/graphql-basic-proxy"
 

@@ -39,7 +39,6 @@ source ./env.sh
 Next, let's create and deploy the Apigee resources necessary to test the quota policy.
 
 ```sh
-cd ${WORK_DIR}
 ./deploy-graphql-basic-proxy.sh
 ```
 
@@ -57,5 +56,5 @@ Congratulations! You've successfully implemented Apigee proxy for graphql endpoi
 If you want to clean up the artefacts from this example in your Apigee Organization, first source your `env.sh` script, and then run
 
 ```bash
-${WORK_DIR}/clean-up-graphql-basic-proxy.sh
+./clean-up-graphql-basic-proxy.sh
 ```
