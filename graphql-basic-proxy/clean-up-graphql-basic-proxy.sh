@@ -45,6 +45,23 @@ apigeecli apis undeploy --name graphql-basic-proxy --env "$APIGEE_ENV" --rev "$R
 echo "Deleting proxy graphql-basic-proxy"
 apigeecli apis delete --name graphql-basic-proxy --org "$PROJECT_ID" --token "$TOKEN"
 
+
+echo "Undeploying graphql-sample-api-source-authors"
+REV=$(apigeecli envs deployments get --env "$APIGEE_ENV" --org "$PROJECT_ID" --token "$TOKEN" --disable-check | jq .'deployments[]| select(.apiProxy=="graphql-sample-api-source-authors").revision' -r)
+apigeecli apis undeploy --name graphql-sample-api-source-authors --env "$APIGEE_ENV" --rev "$REV" --org "$PROJECT_ID" --token "$TOKEN"
+
+echo "Deleting proxy graphql-sample-api-source-authors"
+apigeecli apis delete --name graphql-sample-api-source-authors --org "$PROJECT_ID" --token "$TOKEN"
+
+
+echo "Undeploying graphql-sample-api-source-books"
+REV=$(apigeecli envs deployments get --env "$APIGEE_ENV" --org "$PROJECT_ID" --token "$TOKEN" --disable-check | jq .'deployments[]| select(.apiProxy=="graphql-sample-api-source-books").revision' -r)
+apigeecli apis undeploy --name graphql-sample-api-source-books --env "$APIGEE_ENV" --rev "$REV" --org "$PROJECT_ID" --token "$TOKEN"
+
+echo "Deleting proxy graphql-sample-api-source-books"
+apigeecli apis delete --name graphql-sample-api-source-books --org "$PROJECT_ID" --token "$TOKEN"
+
+
 GRAPHQL_HOSTED_ENDPOINT=$(gcloud run services describe graphql-example-application --region us-central1 --format json | jq .status.url|cut -d '"' -f 2)
 if [ -z "$GRAPHQL_HOSTED_ENDPOINT" ]; then
   echo "GraphQL endpoint not hosted as part of this excercise."
