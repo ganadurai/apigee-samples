@@ -49,5 +49,6 @@ GRAPHQL_HOSTED_ENDPOINT=$(gcloud run services describe graphql-example-applicati
 if [ -z "$GRAPHQL_HOSTED_ENDPOINT" ]; then
   echo "GraphQL endpoint not hosted as part of this excercise."
 else
+  gcloud iam service-accounts delete "cloudrun-invoker@$PROJECT_ID.iam.gserviceaccount.com"
   gcloud run services delete graphql-example-application --region us-central1
 fi

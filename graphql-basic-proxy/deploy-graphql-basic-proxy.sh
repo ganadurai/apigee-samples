@@ -54,9 +54,9 @@ if [ -z "$GRAPHQL_ENDPOINT" ]; then
   --role=roles/run.invoker
 
   URL_CONTENT="<Authentication><GoogleIDToken><Audience useTargetUrl=\"true\"/></GoogleIDToken></Authentication><URL>$GRAPHQL_HOSTED_ENDPOINT</URL>"
-  sed -i -e "s#<URL>.*</URL>#$URL_CONTENT#g" apiproxy/targets/default.xml
+  sed -i -e "s#<URL>.*</URL>#$URL_CONTENT#g" ${WORK_DIR}/apiproxy/targets/default.xml
 else
-  sed -i -e "s#<URL>.*</URL>#<URL>$GRAPHQL_ENDPOINT</URL>#g" apiproxy/targets/default.xml
+  sed -i -e "s#<URL>.*</URL>#<URL>$GRAPHQL_ENDPOINT</URL>#g" ${WORK_DIR}/apiproxy/targets/default.xml
 fi
 
 cd "${WORK_DIR}"
