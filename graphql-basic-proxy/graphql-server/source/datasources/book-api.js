@@ -1,37 +1,5 @@
 const { RESTDataSource } = require('apollo-datasource-rest');
 
-const AuthorAPI = require('./author-api');
-
-const book1 = {
-  isbn_id: '001AABB',
-  title: 'The Great Gatsby',
-  author_id: '1001'
-}
-
-const book2 = {
-  isbn_id: '099XXYY',
-  title: 'Wuthering Heights',
-  author_id: '1001'
-}
-
-const book3 = {
-  isbn_id: '077FFOO',
-  title: 'Space and Beyond',
-  author_id: '3001'
-}
-
-const books = [
-  book1,
-  book2,
-  book3
-]
-
-const book_map = {
-  '001AABB': book1,
-  '099XXYY': book2,
-  '077FFOO': book3
-}
-
 class BookAPI extends RESTDataSource {
   constructor() {
     super();
