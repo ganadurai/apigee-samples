@@ -1,5 +1,7 @@
 const { RESTDataSource } = require('apollo-datasource-rest');
 
+const AuthorAPI = require('./author-api');
+
 const book1 = {
   isbn_id: '001AABB',
   title: 'The Great Gatsby',

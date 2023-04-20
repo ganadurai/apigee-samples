@@ -21,8 +21,7 @@ class AuthorAPI extends RESTDataSource {
   authorReducer(author) {
     return {
       id: author.id,
-      name: author.name,
-      books: author.books
+      name: author.name
     };
   }
 }

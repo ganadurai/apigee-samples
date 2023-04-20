@@ -10,7 +10,6 @@ const typeDefs = gql`
   type Author {
     id: ID!
     name: String
-    books: [Book]
   }
 
   type Query {
