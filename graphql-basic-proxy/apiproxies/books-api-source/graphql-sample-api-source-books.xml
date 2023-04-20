@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="6" name="graphql-sample-api-source-books">
+  <DisplayName/>
+  <Description/>
+  <CreatedAt>1681524995560</CreatedAt>
+  <LastModifiedAt>1681524995560</LastModifiedAt>
+  <BasePaths>/v1/graphql-sample-api-source/books</BasePaths>
+  <Policies>
+    <Policy>AM-ResponseContent</Policy>
+    <Policy>JS-FindById</Policy>
+  </Policies>
+  <ProxyEndpoints>
+    <ProxyEndpoint>default</ProxyEndpoint>
+  </ProxyEndpoints>
+  <Resources>
+    <Resource>jsc://find-by-id.js</Resource>
+  </Resources>
+</APIProxy>

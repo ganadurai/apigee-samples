@@ -56,9 +56,9 @@ if [ -z "$GRAPHQL_ENDPOINT" ]; then
   sleep 10
 
   URL_CONTENT="<Authentication><GoogleIDToken><Audience useTargetUrl=\"true\"/></GoogleIDToken></Authentication><URL>$GRAPHQL_HOSTED_ENDPOINT</URL>"
-  sed -i -e "s#<URL>.*</URL>#$URL_CONTENT#g" ${WORK_DIR}/apiproxy/targets/default.xml
+  sed -i -e "s#<URL>.*</URL>#$URL_CONTENT#g" ${WORK_DIR}/apiproxies/graphql-proxy/targets/default.xml
 else
-  sed -i -e "s#<URL>.*</URL>#<URL>$GRAPHQL_ENDPOINT</URL>#g" ${WORK_DIR}/apiproxy/targets/default.xml
+  sed -i -e "s#<URL>.*</URL>#<URL>$GRAPHQL_ENDPOINT</URL>#g" ${WORK_DIR}/apiproxies/graphql-proxy/targets/default.xml
 fi
 
 cd "${WORK_DIR}"
@@ -73,11 +73,19 @@ export PATH=$PATH:$HOME/.apigeecli/bin
 
 echo "Uploading Apigee artifacts..."
 
-echo "Importing and Deploying Apigee graphql-basic-proxy proxy..."
-apigeecli apis create bundle -f apiproxy  -n graphql-basic-proxy --org "$PROJECT_ID" --token "$TOKEN" --disable-check 
+echo "Importing and Deploying authors api source proxy..."
+REV=$(apigeecli apis create bundle -f apiproxies/authors-api-source -n graphql-sample-api-source-authors --org "$PROJECT_ID" --token "$TOKEN" --disable-check | jq ."revision" -r)
+apigeecli apis deploy --wait --name graphql-sample-api-source-authors --ovr --rev "$REV" --org "$PROJECT_ID" --env "$APIGEE_ENV" --token "$TOKEN" 
+
+echo "Importing and Deploying books api source proxy..."
+REV=$(apigeecli apis create bundle -f apiproxies/books-api-source -n graphql-sample-api-source-books --org "$PROJECT_ID" --token "$TOKEN" --disable-check | jq ."revision" -r)
+apigeecli apis deploy --wait --name graphql-sample-api-source-books --ovr --rev "$REV" --org "$PROJECT_ID" --env "$APIGEE_ENV" --token "$TOKEN" 
+
+echo "Importing Apigee graphql-basic-proxy proxy..."
+apigeecli apis create bundle -f apiproxies/graphql-proxy  -n graphql-basic-proxy --org "$PROJECT_ID" --token "$TOKEN" --disable-check 
 REV=$(apigeecli apis create bundle -f apiproxy  -n graphql-basic-proxy --org "$PROJECT_ID" --token "$TOKEN" --disable-check | jq ."revision" -r)
 
-echo "Deploying Apigee artifacts..."
+echo "Deploying Apigee graphql-basic-proxy proxy..."
 
 if [ -z "$GRAPHQL_ENDPOINT" ]; then
   # With service account passed in
