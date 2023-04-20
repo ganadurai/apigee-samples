@@ -36,12 +36,12 @@ if [ -z "$GRAPHQL_ENDPOINT" ]; then
 
   cd ${WORK_DIR}/graphql-server/source
 
-  gcloud run deploy graphql-example-application   \
+  gcloud run deploy graphql-example-application1   \
     --region us-central1   \
     --port 4000 \
     --source .
 
-  GRAPHQL_HOSTED_ENDPOINT=$(gcloud run services describe graphql-example-application --region us-central1 --format json | jq .status.url|cut -d '"' -f 2)
+  GRAPHQL_HOSTED_ENDPOINT=$(gcloud run services describe graphql-example-application1 --region us-central1 --format json | jq .status.url|cut -d '"' -f 2)
   export GRAPHQL_HOSTED_ENDPOINT;
 
 
