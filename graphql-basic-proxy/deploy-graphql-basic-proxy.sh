@@ -56,9 +56,9 @@ if [ -z "$GRAPHQL_ENDPOINT" ]; then
   sleep 10
 
   URL_CONTENT="<Authentication><GoogleIDToken><Audience useTargetUrl=\"true\"/></GoogleIDToken></Authentication><URL>$GRAPHQL_HOSTED_ENDPOINT</URL>"
-  sed -i -e "s#<URL>.*</URL>#$URL_CONTENT#g" ${WORK_DIR}/apiproxies/graphql-proxy/targets/default.xml
+  sed -i -e "s#<URL>.*</URL>#$URL_CONTENT#g" ${WORK_DIR}/apiproxies/apiproxy/targets/default.xml
 else
-  sed -i -e "s#<URL>.*</URL>#<URL>$GRAPHQL_ENDPOINT</URL>#g" ${WORK_DIR}/apiproxies/graphql-proxy/targets/default.xml
+  sed -i -e "s#<URL>.*</URL>#<URL>$GRAPHQL_ENDPOINT</URL>#g" ${WORK_DIR}/apiproxies/apiproxy/targets/default.xml
 fi
 
 cd "${WORK_DIR}"
@@ -82,7 +82,7 @@ REV=$(apigeecli apis create bundle -p apiproxies/graphql-sample-api-source-books
 apigeecli apis deploy --wait --name graphql-sample-api-source-books --ovr --rev "$REV" --org "$PROJECT_ID" --env "$APIGEE_ENV" --token "$TOKEN" 
 
 echo "Importing Apigee graphql-basic-proxy proxy..."
-REV=$(apigeecli apis create bundle -f apiproxy  -n graphql-basic-proxy --org "$PROJECT_ID" --token "$TOKEN" --disable-check | jq ."revision" -r)
+REV=$(apigeecli apis create bundle -f apiproxies/apiproxy  -n graphql-basic-proxy --org "$PROJECT_ID" --token "$TOKEN" --disable-check | jq ."revision" -r)
 
 echo "Deploying Apigee graphql-basic-proxy proxy..."
 
