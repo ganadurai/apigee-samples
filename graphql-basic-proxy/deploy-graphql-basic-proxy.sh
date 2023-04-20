@@ -31,7 +31,7 @@ fi
 
 STATIC_GRAPHQL_ENDPOINT="https://apollo-fullstack-tutorial.herokuapp.com/graphql";
 
-if [ -z "$GRAPHQL_HOSTED" ]; then
+if [ -z "$GRAPHQL_HOSTED_ENDPOINT" ]; then
   sed -i -e "s#<URL>.*</URL>#<URL>$GRAPHQL_ENDPOINT</URL>#g" apiproxy/targets/default.xml
 else
   # GraphQL hosted in cloudrun as part of this setup 

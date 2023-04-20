@@ -40,13 +40,11 @@ gcloud services enable cloudbuild.googleapis.com artifactregistry.googleapis.com
 
 cd ${WORK_DIR}/graphql-server/source
 
-export GRAPHQL_HOSTED=true
-
 gcloud run deploy graphql-example-application   \
   --region us-central1   \
   --port 4000 \
   --source .
 
-export GRAPHQL_HOSTED_ENDPOINT=$(gcloud run services describe graphql-example-application --region us-central1 --format json | jq .status.url|cut -d '"' -f 2)
-
+GRAPHQL_HOSTED_ENDPOINT=$(gcloud run services describe graphql-example-application --region us-central1 --format json | jq .status.url|cut -d '"' -f 2)
+export GRAPHQL_HOSTED_ENDPOINT;
 

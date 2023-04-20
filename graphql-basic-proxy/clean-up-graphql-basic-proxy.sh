@@ -32,12 +32,6 @@ if [ -z "$APIGEE_HOST" ]; then
     exit
 fi
 
-if [ -z "$GRAPHQL_HOSTED" ]; then 
-  echo ""
-else
-  gcloud run services delete graphql-example-application --region us-central1
-fi
-
 TOKEN=$(gcloud auth print-access-token)
 
 echo "Installing apigeecli"
@@ -51,8 +45,9 @@ apigeecli apis undeploy --name graphql-basic-proxy --env "$APIGEE_ENV" --rev "$R
 echo "Deleting proxy graphql-basic-proxy"
 apigeecli apis delete --name graphql-basic-proxy --org "$PROJECT" --token "$TOKEN"
 
-if [ -z "$GRAPHQL_HOSTED" ]; then
+GRAPHQL_HOSTED_ENDPOINT=$(gcloud run services describe graphql-example-application --region us-central1 --format json | jq .status.url|cut -d '"' -f 2)
+if [ -z "$GRAPHQL_HOSTED_ENDPOINT" ]; then
   echo "GraphQL endpoint not hosted as part of this excercise."
 else
-  gcloud run services delete graphql-example-application
+  gcloud run services delete graphql-example-application --region us-central1
 fi
