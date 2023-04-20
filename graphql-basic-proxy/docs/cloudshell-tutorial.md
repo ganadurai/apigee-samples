@@ -24,7 +24,7 @@ export WORK_DIR=$(pwd)
 
 Edit the provided sample `env.sh` file, and set the environment variables there.
 
-Click <walkthrough-editor-open-file filePath="graphql-basic-proxy/env.sh">here</walkthrough-editor-open-file> to open the file in the editor
+Click <walkthrough-editor-open-file filePath="env.sh">here</walkthrough-editor-open-file> to open the file in the editor
 
 Then, source the `env.sh` file in the Cloud shell.
 
@@ -34,38 +34,13 @@ source ./env.sh
 
 ---
 
-## Deploy GraphQL sample application in Cloud Run 
-
-This is optional, if you dont have a GraphQL backend for Apigee to proxy into, execute the below to deploy GraphQL application for which Apigee will the facade.
-
-```sh
-cd ${WORK_DIR}/graphql-basic-proxy/graphql-server
-./deploy-graphql-sample-application.sh
-```
-
 ## Deploy Apigee components
 
 Next, let's create and deploy the Apigee resources necessary to test the quota policy.
 
 ```sh
-cd ${WORK_DIR}/graphql-basic-proxy
+cd ${WORK_DIR}
 ./deploy-graphql-basic-proxy.sh
-```
-
-This script creates a sample API Proxy for the graphql backend endpoint.
-
-```sh
-export PROXY_URL="$APIGEE_HOST/v1/samples/graphql-basic-proxy"
-
-echo " "
-echo "All the Apigee artifacts are successfully deployed!"
-echo " "
-echo "Your Proxy URL is: https://$PROXY_URL"
-
-
-echo "Introspect GraphQL schema via Apigee Endpoint: "
-echo "https://studio.apollographql.com/sandbox/explorer?endpoint=https://$PROXY_URL"
-echo " "
 ```
 
 ---

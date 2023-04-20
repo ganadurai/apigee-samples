@@ -14,12 +14,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-export PROJECT="<GCP_PROJECT_ID>"
+export PROJECT_ID="<GCP_PROJECT_ID>"
 export APIGEE_HOST="<APIGEE_DOMAIN_NAME>"
 export APIGEE_ENV="<APIGEE_ENVIRONMENT_NAME>"
 
-gcloud config set project $PROJECT
+gcloud config set project $PROJECT_ID
 
 #Update the below value if you want to point to any other external GraphQL endpoint.
 #You can also leave this valaue blank, and deploy GraphQL service in CloudRun (Instructions provided in the README doc)
-export GRAPHQL_ENDPOINT="https://apollo-fullstack-tutorial.herokuapp.com/graphql"
+#Example GraphQL endpoint you can use "https://apollo-fullstack-tutorial.herokuapp.com/graphql"
+export GRAPHQL_ENDPOINT="<GraphQL endpoint URI (with https prefixed)>"

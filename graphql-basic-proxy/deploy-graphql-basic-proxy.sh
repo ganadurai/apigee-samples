@@ -14,8 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-if [ -z "$PROJECT" ]; then
-    echo "No PROJECT variable set"
+if [ -z "$PROJECT_ID" ]; then
+    echo "No PROJECT_ID variable set"
     exit
 fi
 
@@ -29,12 +29,22 @@ if [ -z "$APIGEE_HOST" ]; then
     exit
 fi
 
-STATIC_GRAPHQL_ENDPOINT="https://apollo-fullstack-tutorial.herokuapp.com/graphql";
+if [ -z "$GRAPHQL_ENDPOINT" ]; then
+  gcloud config set project "$PROJECT_ID"
 
-if [ -z "$GRAPHQL_HOSTED_ENDPOINT" ]; then
-  sed -i -e "s#<URL>.*</URL>#<URL>$GRAPHQL_ENDPOINT</URL>#g" apiproxy/targets/default.xml
-else
-  # GraphQL hosted in cloudrun as part of this setup 
+  gcloud services enable cloudbuild.googleapis.com artifactregistry.googleapis.com run.googleapis.com
+
+  cd ${WORK_DIR}/graphql-server/source
+
+  gcloud run deploy graphql-example-application   \
+    --region us-central1   \
+    --port 4000 \
+    --source .
+
+  GRAPHQL_HOSTED_ENDPOINT=$(gcloud run services describe graphql-example-application --region us-central1 --format json | jq .status.url|cut -d '"' -f 2)
+  export GRAPHQL_HOSTED_ENDPOINT;
+
+
   PROJECT_NUMBER="$(gcloud projects describe "${PROJECT_ID}" --format='get(projectNumber)')"
 
   gcloud iam service-accounts create cloudrun-invoker  --project="$PROJECT_ID" --display-name="Cloudrun Invoker"
@@ -45,7 +55,11 @@ else
 
   URL_CONTENT="<Authentication><GoogleIDToken><Audience useTargetUrl=\"true\"/></GoogleIDToken></Authentication><URL>$GRAPHQL_HOSTED_ENDPOINT</URL>"
   sed -i -e "s#<URL>.*</URL>#$URL_CONTENT#g" apiproxy/targets/default.xml
+else
+  sed -i -e "s#<URL>.*</URL>#<URL>$GRAPHQL_ENDPOINT</URL>#g" apiproxy/targets/default.xml
 fi
+
+cd "${WORK_DIR}"
 
 TOKEN=$(gcloud auth print-access-token)
 
@@ -58,9 +72,9 @@ export PATH=$PATH:$HOME/.apigeecli/bin
 echo "Deploying Apigee artifacts..."
 
 echo "Importing and Deploying Apigee graphql-basic-proxy proxy..."
-apigeecli apis create bundle -f apiproxy  -n graphql-basic-proxy --org "$PROJECT" --token "$TOKEN" --disable-check 
-REV=$(apigeecli apis create bundle -f apiproxy  -n graphql-basic-proxy --org "$PROJECT" --token "$TOKEN" --disable-check | jq ."revision" -r)
-apigeecli apis deploy --wait --name graphql-basic-proxy --ovr --rev "$REV" --org "$PROJECT" --env "$APIGEE_ENV" --token "$TOKEN"
+apigeecli apis create bundle -f apiproxy  -n graphql-basic-proxy --org "$PROJECT_ID" --token "$TOKEN" --disable-check 
+REV=$(apigeecli apis create bundle -f apiproxy  -n graphql-basic-proxy --org "$PROJECT_ID" --token "$TOKEN" --disable-check | jq ."revision" -r)
+apigeecli apis deploy --wait --name graphql-basic-proxy --ovr --rev "$REV" --org "$PROJECT_ID" --env "$APIGEE_ENV" --token "$TOKEN"
 
 export PROXY_URL="$APIGEE_HOST/v1/samples/graphql-basic-proxy"
 

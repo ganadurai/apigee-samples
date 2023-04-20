@@ -17,8 +17,8 @@
 #echo "Enabling APIs..."
 #gcloud services enable cloudbuild.googleapis.com
 
-if [ -z "$PROJECT" ]; then
-    echo "No PROJECT variable set"
+if [ -z "$PROJECT_ID" ]; then
+    echo "No PROJECT_ID variable set"
     exit
 fi
 
@@ -39,11 +39,11 @@ curl -s https://raw.githubusercontent.com/apigee/apigeecli/master/downloadLatest
 export PATH=$PATH:$HOME/.apigeecli/bin
 
 echo "Undeploying graphql-basic-proxy"
-REV=$(apigeecli envs deployments get --env "$APIGEE_ENV" --org "$PROJECT" --token "$TOKEN" --disable-check | jq .'deployments[]| select(.apiProxy=="graphql-basic-proxy").revision' -r)
-apigeecli apis undeploy --name graphql-basic-proxy --env "$APIGEE_ENV" --rev "$REV" --org "$PROJECT" --token "$TOKEN"
+REV=$(apigeecli envs deployments get --env "$APIGEE_ENV" --org "$PROJECT_ID" --token "$TOKEN" --disable-check | jq .'deployments[]| select(.apiProxy=="graphql-basic-proxy").revision' -r)
+apigeecli apis undeploy --name graphql-basic-proxy --env "$APIGEE_ENV" --rev "$REV" --org "$PROJECT_ID" --token "$TOKEN"
 
 echo "Deleting proxy graphql-basic-proxy"
-apigeecli apis delete --name graphql-basic-proxy --org "$PROJECT" --token "$TOKEN"
+apigeecli apis delete --name graphql-basic-proxy --org "$PROJECT_ID" --token "$TOKEN"
 
 GRAPHQL_HOSTED_ENDPOINT=$(gcloud run services describe graphql-example-application --region us-central1 --format json | jq .status.url|cut -d '"' -f 2)
 if [ -z "$GRAPHQL_HOSTED_ENDPOINT" ]; then
