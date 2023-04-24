@@ -43,7 +43,7 @@ export WORK_DIR=$(pwd)
 * `PROJECT` the project where your Apigee organization is located
 * `APIGEE_HOST` the externally reachable hostname of the Apigee environment group that contains APIGEE_ENV
 * `APIGEE_ENV` the Apigee environment where the demo resources should be created
-* `GRAPHQL_ENDPOINT` the GraphQL endpoint Apigee will be proxing. You can skip this variable if you dont have an GraphQL endpoint in the below steps you can host a GraphQL sample application in Cloud Run. Example: https://apollo-fullstack-tutorial.herokuapp.com/graphql
+* `GRAPHQL_ENDPOINT` the GraphQL endpoint Apigee will be proxing. You can skip this variable if you dont have an GraphQL endpoint skip setting this value. The following script will deploy graphql application in CloudRun. Example: https://apollo-fullstack-tutorial.herokuapp.com/graphql
 
 3. source the `env.sh` file
 
