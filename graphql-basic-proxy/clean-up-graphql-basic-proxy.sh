@@ -63,9 +63,9 @@ apigeecli apis delete --name graphql-sample-api-source-books --org "$PROJECT_ID"
 
 
 GRAPHQL_HOSTED_ENDPOINT=$(gcloud run services describe graphql-example-application1 --region us-central1 --format json | jq .status.url|cut -d '"' -f 2)
-if [ -z "$GRAPHQL_HOSTED_ENDPOINT" ]; then
-  echo "GraphQL endpoint not hosted as part of this excercise."
-else
+RESULT=$?
+if [ $RESULT -eq 0 ]; then
+  echo "Removing Cloud Run hosted GraphQL endpoint"
   gcloud iam service-accounts delete "cloudrun-invoker@$PROJECT_ID.iam.gserviceaccount.com"
   gcloud run services delete graphql-example-application1 --region us-central1
 fi
