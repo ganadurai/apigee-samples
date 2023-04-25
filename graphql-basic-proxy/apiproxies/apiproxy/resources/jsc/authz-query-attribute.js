@@ -1,4 +1,8 @@
-var authz_query_attrs = context.getVariable("verifyapikey.Verify-API-Key-1.apiproduct.authz_query_attrs");
+//var authz_query_attrs = context.getVariable("verifyapikey.Verify-API-Key-1.apiproduct.authz_query_attrs");
+//var authz_query_attrs = ["isbn_id","title","author.id","author.name"]
+//var authz_query_attrs = ["title","author.id","author.name"]
+
+var authz_query_attrs = context.getVariable("cosumer.scope.allowed.attrs");
 var accessedFields = context.getVariable("accessedFields");
 
 var notAllowedFields = [];

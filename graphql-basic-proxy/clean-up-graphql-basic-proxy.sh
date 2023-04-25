@@ -38,6 +38,20 @@ echo "Installing apigeecli"
 curl -s https://raw.githubusercontent.com/apigee/apigeecli/master/downloadLatest.sh | bash
 export PATH=$PATH:$HOME/.apigeecli/bin
 
+export MGMT_HOST="https://apigee.googleapis.com"
+
+echo "Deleting the developer app"
+curl -H "Authorization: Bearer ${TOKEN}" -X DELETE "${MGMT_HOST}/v1/organizations/${PROJECT_ID}/developers/graphql-consumer-developer@google.com/apps/graphql-consumer-gold-app"
+curl -H "Authorization: Bearer ${TOKEN}" -X DELETE "${MGMT_HOST}/v1/organizations/${PROJECT_ID}/developers/graphql-consumer-developer@google.com/apps/graphql-consumer-bronze-app"
+
+echo "Deleting the developer"
+curl -H "Authorization: Bearer ${TOKEN}" -X DELETE "${MGMT_HOST}/v1/organizations/${PROJECT_ID}/developers/graphql-consumer-developer@google.com"
+
+echo "Deleting the product"
+curl -H "Authorization: Bearer ${TOKEN}" -X DELETE "${MGMT_HOST}/v1/organizations/${PROJECT_ID}/apiproducts/graphql-demo-product-gold"
+curl -H "Authorization: Bearer ${TOKEN}" -X DELETE "${MGMT_HOST}/v1/organizations/${PROJECT_ID}/apiproducts/graphql-demo-product-bronze"
+
+
 echo "Undeploying graphql-basic-proxy"
 REV=$(apigeecli envs deployments get --env "$APIGEE_ENV" --org "$PROJECT_ID" --token "$TOKEN" --disable-check | jq .'deployments[]| select(.apiProxy=="graphql-basic-proxy").revision' -r)
 apigeecli apis undeploy --name graphql-basic-proxy --env "$APIGEE_ENV" --rev "$REV" --org "$PROJECT_ID" --token "$TOKEN"

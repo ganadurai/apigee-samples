@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<KeyValueMapOperations continueOnError="false" enabled="true" name="scope-vs-allowed-attrs" mapIdentifier="scope-vs-allowed-attrs">
+    <DisplayName>scope-vs-allowed-attrs</DisplayName>
+    <Properties/>
+    <ExclusiveCache>false</ExclusiveCache>
+    <ExpiryTimeInSecs>300</ExpiryTimeInSecs>
+    <InitialEntries>
+        <Entry>
+            <Key>
+                <Parameter>books.partner</Parameter>
+            </Key>
+            <Value>["isbn_id","title","author.id","author.name"]</Value>
+            <!--
+            <Value>isbn_id</Value>
+            <Value>title</Value>
+            <Value>author</Value>
+            <Value>authorname</Value>
+            -->
+        </Entry>
+        <Entry>
+            <Key>
+                <Parameter>books.reader</Parameter>
+            </Key>
+            <Value>["title","author.id","author.name"]</Value>
+            <!--
+            <Value>title</Value>
+            <Value>authorid</Value>
+            <Value>authorname</Value>
+            -->
+        </Entry>
+    </InitialEntries>
+    <Get assignTo="cosumer.scope.allowed.attrs">
+        <Key>
+            <Parameter ref="customerscope"/>
+        </Key>
+    </Get>
+    <Scope>environment</Scope>
+</KeyValueMapOperations>

@@ -10,6 +10,11 @@
     <Response/>
   </PostFlow>
   <HTTPTargetConnection>
-    <URL>https://apollo-fullstack-tutorial.herokuapp.com/graphql</URL>
+    <Authentication>
+      <GoogleIDToken>
+        <Audience useTargetUrl="true"/>
+      </GoogleIDToken>
+    </Authentication>
+    <URL>https://graphql-example-application1-snwrggxhha-uc.a.run.app</URL>
   </HTTPTargetConnection>
 </TargetEndpoint>

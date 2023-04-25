@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <GraphQL name="GQL-Policy">
-  <Source>request</Source>
-  <OperationType>query_mutation</OperationType>
-  <MaxDepth>4</MaxDepth>
-  <MaxCount>4</MaxCount>
-  <Action>parse_verify</Action>
-  <ResourceURL>graphql://schema.graphql</ResourceURL>
+    <Source>request</Source>
+    <OperationType>query_mutation</OperationType>
+    <!--
+    <MaxDepth>4</MaxDepth>
+    <MaxCount>4</MaxCount>
+    <ResourceURL>graphql://schema.graphql</ResourceURL>
+    <Action>parse_verify</Action>
+    -->
+    <Action>parse</Action>
 </GraphQL>

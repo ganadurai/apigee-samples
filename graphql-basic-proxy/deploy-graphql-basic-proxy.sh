@@ -96,6 +96,117 @@ else
   apigeecli apis deploy --wait --name graphql-basic-proxy --ovr --rev "$REV" --org "$PROJECT_ID" --env "$APIGEE_ENV" --token "$TOKEN" 
 fi
 
+export MGMT_HOST="https://apigee.googleapis.com"
+
+echo "Set up Apigee Product Gold"
+curl -H "Authorization: Bearer ${TOKEN}"   -H "Content-Type:application/json"   "${MGMT_HOST}/v1/organizations/${PROJECT_ID}/apiproducts" -d \
+    '{
+        "name": "graphql-demo-product-gold",
+        "displayName": "graphql-demo-product-gold",
+        "approvalType": "auto",
+        "attributes": [
+            {
+            "name": "access",
+            "value": "private"
+            },
+            {
+            "name": "scope",
+            "value": "books.partner"
+            }
+        ],
+        "description": "API Product for demoing GraphQL with Scope attribute set for full access",
+        "environments": [
+            "'"${APIGEE_ENV}"'"
+        ],
+        "operationGroup": {
+            "operationConfigs": [
+                {
+                    "apiSource": "graphql-basic-proxy",
+                    "operations": [
+                    {
+                        "resource": "/"
+                    }
+                    ],
+                    "quota": {}
+                }
+            ]
+        }
+    }'
+
+echo "Set up Apigee Product Bronze"
+curl -H "Authorization: Bearer ${TOKEN}"   -H "Content-Type:application/json"   "${MGMT_HOST}/v1/organizations/${PROJECT_ID}/apiproducts" -d \
+    '{
+        "name": "graphql-demo-product-bronze",
+        "displayName": "graphql-demo-product-bronze",
+        "approvalType": "auto",
+        "attributes": [
+            {
+            "name": "access",
+            "value": "private"
+            },
+            {
+            "name": "scope",
+            "value": "books.reader"
+            }
+        ],
+        "description": "API Product for demoing GraphQL with Scope attribute set for full access",
+        "environments": [
+            "'"${APIGEE_ENV}"'"
+        ],
+        "operationGroup": {
+            "operationConfigs": [
+                {
+                    "apiSource": "graphql-basic-proxy",
+                    "operations": [
+                    {
+                        "resource": "/"
+                    }
+                    ],
+                    "quota": {}
+                }
+            ]
+        }
+    }'
+
+echo "Set up Apigee Developer"
+
+curl -H "Authorization: Bearer ${TOKEN}"   -H "Content-Type:application/json"   "${MGMT_HOST}/v1/organizations/${PROJECT_ID}/developers" -d \
+    '{
+    "email": "graphql-consumer-developer@google.com",
+    "firstName": "GraphQL",
+    "lastName": "Consumer",
+    "userName": "graphql-consumer"
+    }'
+
+echo 'Set up developer app for the Product graphql-demo-product-gold'
+
+curl -H "Authorization: Bearer ${TOKEN}"   -H "Content-Type:application/json"   "${MGMT_HOST}/v1/organizations/${PROJECT_ID}/developers/graphql-consumer-developer@google.com/apps" -d \
+    '{
+    "name":"graphql-consumer-gold-app",
+    "apiProducts": [
+        "graphql-demo-product-gold"
+        ]
+    }'
+curl -H "Authorization: Bearer ${TOKEN}"   -H "Content-Type:application/json"   "${MGMT_HOST}/v1/organizations/${PROJECT_ID}/developers/graphql-consumer-developer@google.com/apps" -d \
+    '{
+    "name":"graphql-consumer-bronze-app",
+    "apiProducts": [
+        "graphql-demo-product-bronze"
+        ]
+    }'
+
+printf "\nExtract the consumer key"
+GOLD_CONSUMER_KEY=$(curl -s -H "Authorization: Bearer ${TOKEN}"  \
+    -H "Content-Type:application/json" \
+    "${MGMT_HOST}/v1/organizations/${PROJECT_ID}/developers/graphql-consumer-developer@google.com/apps/graphql-consumer-gold-app" | \
+    jq '.credentials[0].consumerKey'); \
+    GOLD_CONSUMER_KEY=$(echo "$CONSUMER_KEY"|cut -d '"' -f 2); export GOLD_CONSUMER_KEY;
+BRONZE_CONSUMER_KEY=$(curl -s -H "Authorization: Bearer ${TOKEN}"  \
+    -H "Content-Type:application/json" \
+    "${MGMT_HOST}/v1/organizations/${PROJECT_ID}/developers/graphql-consumer-developer@google.com/apps/graphql-consumer-bronze-app" | \
+    jq '.credentials[0].consumerKey'); \
+    BRONZE_CONSUMER_KEY=$(echo "$CONSUMER_KEY"|cut -d '"' -f 2); export BRONZE_CONSUMER_KEY;
+
 export PROXY_URL="$APIGEE_HOST/v1/samples/graphql-basic-proxy"
 
 echo " "

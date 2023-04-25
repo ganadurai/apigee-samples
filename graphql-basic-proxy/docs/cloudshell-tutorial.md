@@ -1,4 +1,4 @@
-# Basic Quota
+# GraphQL - Apigee Proxy
 
 ---
 This sample shows how to implement a [Apigee proxy for GraphQL backend] (https://cloud.google.com/apigee/docs/api-platform/develop/graphql). 

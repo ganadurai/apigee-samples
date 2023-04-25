@@ -1,30 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ProxyEndpoint name="default">
-  <PreFlow name="PreFlow">
-    <Request>
-      <!--
-      <Step>
-      <Name>GQL-Policy</Name>
-    </Step>
-      -->
-    <Step>
-      <Name>JS-process-gql-req</Name>
-    </Step>
-    <Step>
-      <Name>Authz-query-attribute</Name>
-    </Step>
-  </Request>
-  <Response/>
-</PreFlow>
-<Flows/>
-<PostFlow name="PostFlow">
-  <Request/>
-  <Response/>
-</PostFlow>
-<HTTPProxyConnection>
-  <BasePath>/v1/samples/graphql-basic-proxy</BasePath>
-</HTTPProxyConnection>
-<RouteRule name="default">
-  <TargetEndpoint>default</TargetEndpoint>
-</RouteRule>
+    <PreFlow name="PreFlow">
+        <Request>
+            <Step>
+                <Name>Verify-API-Key-1</Name>
+            </Step>
+            <Step>
+                <Name>GQL-Policy</Name>
+                <Condition>request.verb != "OPTIONS"</Condition>
+            </Step>
+            <Step>
+                <Name>JS-process-gql-req</Name>
+                <Condition>request.verb != "OPTIONS"</Condition>
+            </Step>
+            <Step>
+                <Name>scope-vs-allowed-attrs</Name>
+            </Step>
+            <Step>
+                <Name>Authz-query-attribute</Name>
+                <Condition>request.verb != "OPTIONS"</Condition>
+            </Step>
+            <Step>
+                <Name>Raise-Fault-1</Name>
+                <Condition>(isAttrQueryNotAllowed == "true") and (! request.content Matches "*IntrospectionQuery*")</Condition>
+            </Step>
+        </Request>
+        <Response/>
+    </PreFlow>
+    <Flows/>
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response/>
+    </PostFlow>
+    <HTTPProxyConnection>
+        <BasePath>/v1/samples/graphql-basic-proxy</BasePath>
+    </HTTPProxyConnection>
+    <RouteRule name="default">
+        <TargetEndpoint>default</TargetEndpoint>
+    </RouteRule>
 </ProxyEndpoint>

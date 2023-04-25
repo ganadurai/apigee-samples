@@ -2,6 +2,6 @@
 <Javascript continueOnError="false" enabled="true" timeLimit="200" name="JS-process-gql-req">
   <DisplayName>JS-process-gql-req</DisplayName>
   <Properties/>
-  <ResourceURL>jsc://graphql-helper-functions.js</ResourceURL>
+  <IncludeURL>jsc://graphql-helper-functions.js</IncludeURL>
   <ResourceURL>jsc://process-gql-req.js</ResourceURL>
 </Javascript>
