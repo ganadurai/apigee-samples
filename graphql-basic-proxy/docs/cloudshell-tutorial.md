@@ -42,6 +42,13 @@ Next, let's create and deploy the Apigee resources necessary to test the quota p
 ./deploy-graphql-basic-proxy.sh
 ```
 
+## Cleanup
+
+If you want to clean up the artefacts from this example in your Apigee Organization, first source your `env.sh` script, and then run
+
+```bash
+./clean-up-graphql-basic-proxy.sh
+```
 ---
 ## Conclusion
 
@@ -50,11 +57,3 @@ Next, let's create and deploy the Apigee resources necessary to test the quota p
 Congratulations! You've successfully implemented Apigee proxy for graphql endpoint.
 
 <walkthrough-inline-feedback></walkthrough-inline-feedback>
-
-## Cleanup
-
-If you want to clean up the artefacts from this example in your Apigee Organization, first source your `env.sh` script, and then run
-
-```bash
-./clean-up-graphql-basic-proxy.sh
-```
