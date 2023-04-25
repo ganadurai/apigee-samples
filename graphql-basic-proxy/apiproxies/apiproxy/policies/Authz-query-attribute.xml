@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Javascript continueOnError="false" enabled="true" timeLimit="200" name="Authz-query-attribute">
+  <DisplayName>Authz-query-attribute</DisplayName>
+  <Properties/>
+  <ResourceURL>jsc://authz-query-attribute.js</ResourceURL>
+</Javascript>

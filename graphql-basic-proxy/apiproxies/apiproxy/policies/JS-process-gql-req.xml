@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Javascript continueOnError="false" enabled="true" timeLimit="200" name="JS-process-gql-req">
+  <DisplayName>JS-process-gql-req</DisplayName>
+  <Properties/>
+  <ResourceURL>jsc://graphql-helper-functions.js</ResourceURL>
+  <ResourceURL>jsc://process-gql-req.js</ResourceURL>
+</Javascript>
