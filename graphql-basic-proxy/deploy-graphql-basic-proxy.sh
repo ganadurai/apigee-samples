@@ -215,7 +215,11 @@ echo " "
 echo "Your Proxy URL is: https://$PROXY_URL"
 
 
-echo "Introspect GraphQL schema via Apigee Endpoint: "
-echo "https://studio.apollographql.com/sandbox/explorer?endpoint=https://$PROXY_URL"
+echo "Introspect GraphQL schema via Apigee Endpoint for GOLD Consumer : "
+echo "https://studio.apollographql.com/sandbox/explorer?endpoint=https://$PROXY_URL?apikey=GOLD_CONSUMER_KEY"
+echo " "
+
+echo "Introspect GraphQL schema via Apigee Endpoint for BRONZE Consumer : "
+echo "https://studio.apollographql.com/sandbox/explorer?endpoint=https://$PROXY_URL?apikey=BRONZE_CONSUMER_KEY"
 echo " "
 
