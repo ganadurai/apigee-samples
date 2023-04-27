@@ -108,10 +108,6 @@ curl -H "Authorization: Bearer ${TOKEN}"   -H "Content-Type:application/json"   
             {
             "name": "access",
             "value": "private"
-            },
-            {
-            "name": "scope",
-            "value": "books.partner"
             }
         ],
         "description": "API Product for demoing GraphQL with Scope attribute set for full access",
@@ -170,10 +166,6 @@ curl -H "Authorization: Bearer ${TOKEN}"   -H "Content-Type:application/json"   
             {
             "name": "access",
             "value": "private"
-            },
-            {
-            "name": "scope",
-            "value": "books.reader"
             }
         ],
         "description": "API Product for demoing GraphQL with Scope attribute set for full access",
@@ -254,12 +246,12 @@ GOLD_CONSUMER_KEY=$(curl -s -H "Authorization: Bearer ${TOKEN}"  \
     -H "Content-Type:application/json" \
     "${MGMT_HOST}/v1/organizations/${PROJECT_ID}/developers/graphql-consumer-developer@google.com/apps/graphql-consumer-gold-app" | \
     jq '.credentials[0].consumerKey'); \
-    GOLD_CONSUMER_KEY=$(echo "$CONSUMER_KEY"|cut -d '"' -f 2); export GOLD_CONSUMER_KEY;
+    GOLD_CONSUMER_KEY=$(echo "$GOLD_CONSUMER_KEY"|cut -d '"' -f 2); export GOLD_CONSUMER_KEY;
 BRONZE_CONSUMER_KEY=$(curl -s -H "Authorization: Bearer ${TOKEN}"  \
     -H "Content-Type:application/json" \
     "${MGMT_HOST}/v1/organizations/${PROJECT_ID}/developers/graphql-consumer-developer@google.com/apps/graphql-consumer-bronze-app" | \
     jq '.credentials[0].consumerKey'); \
-    BRONZE_CONSUMER_KEY=$(echo "$CONSUMER_KEY"|cut -d '"' -f 2); export BRONZE_CONSUMER_KEY;
+    BRONZE_CONSUMER_KEY=$(echo "$BRONZE_CONSUMER_KEY"|cut -d '"' -f 2); export BRONZE_CONSUMER_KEY;
 
 export PROXY_URL="$APIGEE_HOST/v1/samples/graphql-basic-proxy"
 

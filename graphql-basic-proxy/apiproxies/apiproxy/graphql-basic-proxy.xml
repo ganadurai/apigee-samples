@@ -17,10 +17,10 @@
         <ProxyEndpoint>default</ProxyEndpoint>
     </ProxyEndpoints>
     <Resources>
-        <Resource>graphql://schema.graphql</Resource>
-        <Resource>jsc://authz-query-attribute.js</Resource>
         <Resource>jsc://graphql-helper-functions.js</Resource>
         <Resource>jsc://process-gql-req.js</Resource>
+        <Resource>jsc://authz-query-attribute.js</Resource>
+        <Resource>graphql://schema.graphql</Resource>
     </Resources>
     <TargetEndpoints>
         <TargetEndpoint>default</TargetEndpoint>
