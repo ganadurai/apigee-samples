@@ -15,6 +15,11 @@
         <Audience useTargetUrl="true"/>
       </GoogleIDToken>
     </Authentication>
+    <Authentication>
+      <GoogleIDToken>
+        <Audience useTargetUrl="true"/>
+      </GoogleIDToken>
+    </Authentication>
     <URL>https://graphql-example-application1-snwrggxhha-uc.a.run.app</URL>
   </HTTPTargetConnection>
 </TargetEndpoint>

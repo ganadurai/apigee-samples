@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage continueOnError="false" enabled="true" name="AM-Introspection">
+    <DisplayName>AM-Introspection</DisplayName>
+    <Properties/>
+    <Set>
+        <Payload contentType="application/json">
+          {cosumer.scope.introspection}
+        </Payload>
+        <Headers>
+            <Header name="access-control-allow-origin">*</Header>
+        </Headers>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="request"/>
+</AssignMessage>

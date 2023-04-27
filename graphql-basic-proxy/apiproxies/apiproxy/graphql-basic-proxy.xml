@@ -1,16 +1,17 @@
-<APIProxy revision="24" name="graphql-basic-proxy">
+<APIProxy revision="4" name="graphql-basic-proxy">
     <DisplayName></DisplayName>
     <Description></Description>
-    <CreatedAt>1682458620938</CreatedAt>
-    <LastModifiedAt>1682458620938</LastModifiedAt>
+    <CreatedAt>1682566522004</CreatedAt>
+    <LastModifiedAt>1682566522004</LastModifiedAt>
     <BasePaths>/v1/samples/graphql-basic-proxy</BasePaths>
     <Policies>
         <Policy>Authz-query-attribute</Policy>
         <Policy>GQL-Policy</Policy>
         <Policy>JS-process-gql-req</Policy>
         <Policy>Raise-Fault-1</Policy>
-        <Policy>scope-vs-allowed-attrs</Policy>
         <Policy>Verify-API-Key-1</Policy>
+        <Policy>scope-vs-allowed-attrs</Policy>
+        <Policy>AM-Introspection</Policy>
     </Policies>
     <ProxyEndpoints>
         <ProxyEndpoint>default</ProxyEndpoint>
@@ -20,6 +21,7 @@
         <Resource>jsc://authz-query-attribute.js</Resource>
         <Resource>jsc://graphql-helper-functions.js</Resource>
         <Resource>jsc://process-gql-req.js</Resource>
+        <Resource>jsc://authz-attrs.js</Resource>
     </Resources>
     <TargetEndpoints>
         <TargetEndpoint>default</TargetEndpoint>

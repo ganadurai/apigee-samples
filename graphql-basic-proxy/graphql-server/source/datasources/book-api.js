@@ -23,6 +23,7 @@ class BookAPI extends RESTDataSource {
   bookReducer(book) {
     return {
       isbn_id: book.isbn_id,
+      publication_cost: book.publication_cost,
       title: book.title,
       author_id: book.author_id
     };

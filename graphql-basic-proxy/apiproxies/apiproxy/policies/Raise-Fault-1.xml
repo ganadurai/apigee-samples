@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <RaiseFault continueOnError="false" enabled="true" name="Raise-Fault-1">
-    <DisplayName>Raise Fault-1</DisplayName>
-    <Properties/>
-    <FaultResponse>
-        <Set>
-            <Headers/>
-            <Payload contentType="application/json" variablePrefix="@" variableSuffix="#">
+  <DisplayName>Raise Fault-1</DisplayName>
+  <Properties/>
+  <FaultResponse>
+    <Set>
+      <Headers/>
+      <Payload contentType="application/json" variablePrefix="@" variableSuffix="#">
 {"fault":{"faultstring":"Restricted Query Attributes for the scope attached to the Product"}}
             </Payload>
-            <StatusCode>403</StatusCode>
-            <ReasonPhrase>Not Allowed</ReasonPhrase>
-        </Set>
-    </FaultResponse>
-    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+      <StatusCode>403</StatusCode>
+      <ReasonPhrase>Not Allowed</ReasonPhrase>
+    </Set>
+  </FaultResponse>
+  <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
 </RaiseFault>

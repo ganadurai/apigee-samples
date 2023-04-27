@@ -3,7 +3,8 @@ const { gql } = require('apollo-server');
 const typeDefs = gql`
   type Book {
     isbn_id: ID!
-    title: String,
+    publication_cost: String
+    title: String
     author: Author
   }
 

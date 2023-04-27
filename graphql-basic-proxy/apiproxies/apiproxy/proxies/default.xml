@@ -30,12 +30,21 @@
     <Flows/>
     <PostFlow name="PostFlow">
         <Request/>
-        <Response/>
+        <Response>
+            <Step>
+                <Name>AM-Introspection</Name>
+                <Condition>(request.content Matches "*IntrospectionQuery*") and (request.queryparam.introspect-from-source != true)</Condition>
+            </Step>
+        </Response>
     </PostFlow>
     <HTTPProxyConnection>
         <BasePath>/v1/samples/graphql-basic-proxy</BasePath>
     </HTTPProxyConnection>
     <RouteRule name="default">
         <TargetEndpoint>default</TargetEndpoint>
+        <Condition>(! request.content Matches "*IntrospectionQuery*")</Condition>
+    </RouteRule>
+    <RouteRule name="noroute">
+        <Condition>(request.content Matches "*IntrospectionQuery*") and (request.queryparam.introspect-from-source != true)</Condition>
     </RouteRule>
 </ProxyEndpoint>
