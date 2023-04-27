@@ -150,7 +150,7 @@ curl -H "Authorization: Bearer ${TOKEN}"   -H "Content-Type:application/json"   
               },
               "attributes": [
                 {
-                  "name": "scope",
+                  "name": "graphql.scope",
                   "value": "books.partner"
                 }
               ]
@@ -212,7 +212,7 @@ curl -H "Authorization: Bearer ${TOKEN}"   -H "Content-Type:application/json"   
               },
               "attributes": [
                 {
-                  "name": "scope",
+                  "name": "graphql.scope",
                   "value": "books.reader"
                 }
               ]
