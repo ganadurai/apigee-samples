@@ -130,6 +130,33 @@ curl -H "Authorization: Bearer ${TOKEN}"   -H "Content-Type:application/json"   
                     "quota": {}
                 }
             ]
+        },
+        "graphqlOperationGroup": {
+          "operationConfigs": [
+            {
+              "apiSource": "graphql-basic-proxy",
+              "operations": [
+                {
+                  "operationTypes": [
+                    "query"
+                  ],
+                  "operation": "op_query"
+                }
+              ],
+              "quota": {
+                "limit": "10",
+                "interval": "1",
+                "timeUnit": "minute"
+              },
+              "attributes": [
+                {
+                  "name": "scope",
+                  "value": "books.partner"
+                }
+              ]
+            }
+          ],
+          "operationConfigType": "proxy"
         }
     }'
 
@@ -165,8 +192,35 @@ curl -H "Authorization: Bearer ${TOKEN}"   -H "Content-Type:application/json"   
                     "quota": {}
                 }
             ]
+          },
+        "graphqlOperationGroup": {
+          "operationConfigs": [
+            {
+              "apiSource": "graphql-basic-proxy",
+              "operations": [
+                {
+                  "operationTypes": [
+                    "query"
+                  ],
+                  "operation": "op_query"
+                }
+              ],
+              "quota": {
+                "limit": "5",
+                "interval": "1",
+                "timeUnit": "minute"
+              },
+              "attributes": [
+                {
+                  "name": "scope",
+                  "value": "books.reader"
+                }
+              ]
+            }
+          ],
+          "operationConfigType": "proxy"
         }
-    }'
+      }'
 
 echo "Set up Apigee Developer"
 
