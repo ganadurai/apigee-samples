@@ -42,7 +42,7 @@
     </HTTPProxyConnection>
     <RouteRule name="default">
         <TargetEndpoint>default</TargetEndpoint>
-        <Condition>(! request.content Matches "*IntrospectionQuery*")</Condition>
+        <Condition>(! request.content Matches "*IntrospectionQuery*") or (request.queryparam.introspect-from-source == true)</Condition>
     </RouteRule>
     <RouteRule name="noroute">
         <Condition>(request.content Matches "*IntrospectionQuery*") and (request.queryparam.introspect-from-source != true)</Condition>
