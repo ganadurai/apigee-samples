@@ -25,5 +25,5 @@ context.setVariable("accessedFields", accessedFields);
 
 //For Testing, setting the variable. This should come from Product scope
 //context.setVariable("customerscope", "books.reader");
-
+print('graphqlscope : ' + context.getVariable("verifyapikey.Verify-API-Key-1.apiproduct.graphqlscope"));
 context.setVariable("customerscope", context.getVariable("verifyapikey.Verify-API-Key-1.apiproduct.scope"));
