@@ -108,6 +108,10 @@ curl -H "Authorization: Bearer ${TOKEN}"   -H "Content-Type:application/json"   
             {
             "name": "access",
             "value": "private"
+            },
+            {
+              "name": "scope",
+              "value": "books.partner"
             }
         ],
         "description": "API Product for demoing GraphQL with Scope attribute set for full access",
@@ -166,6 +170,10 @@ curl -H "Authorization: Bearer ${TOKEN}"   -H "Content-Type:application/json"   
             {
             "name": "access",
             "value": "private"
+            },
+            {
+              "name": "scope",
+              "value": "books.partner"
             }
         ],
         "description": "API Product for demoing GraphQL with Scope attribute set for full access",
