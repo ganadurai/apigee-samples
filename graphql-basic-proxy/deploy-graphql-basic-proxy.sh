@@ -127,7 +127,11 @@ curl -H "Authorization: Bearer ${TOKEN}"   -H "Content-Type:application/json"   
                         "resource": "/"
                     }
                     ],
-                    "quota": {}
+                    "quota": {
+                      "limit": "20",
+                      "interval": "1",
+                      "timeUnit": "minute"
+                    }
                 }
             ]
         },
@@ -144,7 +148,7 @@ curl -H "Authorization: Bearer ${TOKEN}"   -H "Content-Type:application/json"   
                 }
               ],
               "quota": {
-                "limit": "10",
+                "limit": "20",
                 "interval": "1",
                 "timeUnit": "minute"
               },
@@ -190,7 +194,7 @@ curl -H "Authorization: Bearer ${TOKEN}"   -H "Content-Type:application/json"   
                     }
                     ],
                     "quota": {
-                      "limit": "5",
+                      "limit": "10",
                       "interval": "1",
                       "timeUnit": "minute"
                     }
@@ -210,7 +214,7 @@ curl -H "Authorization: Bearer ${TOKEN}"   -H "Content-Type:application/json"   
                 }
               ],
               "quota": {
-                "limit": "5",
+                "limit": "10",
                 "interval": "1",
                 "timeUnit": "minute"
               },
