@@ -6,8 +6,11 @@
                 <Name>Verify-API-Key-1</Name>
             </Step>
             <Step>
+                <Name>QP-Quota-1</Name>
+            </Step>
+            <Step>
                 <Name>GQL-Policy</Name>
-                <Condition>request.verb != "OPTIONS"</Condition>
+                <Condition>(request.verb != "OPTIONS") and (! request.content Matches "*IntrospectionQuery*")</Condition>
             </Step>
             <Step>
                 <Name>JS-process-gql-req</Name>
@@ -34,6 +37,10 @@
             <Step>
                 <Name>AM-Introspection</Name>
                 <Condition>(request.content Matches "*IntrospectionQuery*") and (request.queryparam.introspect-from-source != true)</Condition>
+            </Step>
+            <Step>
+                <Name>GQL-Policy</Name>
+                <Condition>(request.verb != "OPTIONS") and (! request.content Matches "*IntrospectionQuery*")</Condition>
             </Step>
         </Response>
     </PostFlow>

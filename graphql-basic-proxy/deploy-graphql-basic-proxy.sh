@@ -189,7 +189,11 @@ curl -H "Authorization: Bearer ${TOKEN}"   -H "Content-Type:application/json"   
                         "resource": "/"
                     }
                     ],
-                    "quota": {}
+                    "quota": {
+                      "limit": "5",
+                      "interval": "1",
+                      "timeUnit": "minute"
+                    }
                 }
             ]
           },

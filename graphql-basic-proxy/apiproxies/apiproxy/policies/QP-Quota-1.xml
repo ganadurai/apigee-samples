@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Quota continueOnError="false" enabled="true" name="QP-Quota-1">
+    <Identifier ref="verifyapikey.client_id"/>
+    <Interval ref="verifyapikey.Verify-API-Key-1.apiproduct.developer.quota.interval"/>
+    <TimeUnit ref="verifyapikey.Verify-API-Key-1.apiproduct.developer.quota.timeunit"/>
+    <Allow countRef="verifyapikey.Verify-API-Key-1.apiproduct.developer.quota.limit"/>
+</Quota>
